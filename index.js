@@ -25,6 +25,7 @@ async function run() {
     try {
         await client.connect();
         const projectsCollection =  client.db("Niloy-Dey-Portfolio").collection("projects");
+        const skillsCollection =  client.db("Niloy-Dey-Portfolio").collection("skills");
 
 
 
@@ -38,6 +39,14 @@ async function run() {
             const cursor = projectsCollection.find({});
             const projects = await cursor.toArray();
             res.send(projects);
+        })
+
+
+        //GETTING skills DATA
+        app.get('/skills', async (req, res) => {
+            const cursor = skillsCollection.find({});
+            const skills = await cursor.toArray();
+            res.send(skills);
         })
 
         
