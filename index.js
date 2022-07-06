@@ -26,6 +26,8 @@ async function run() {
         await client.connect();
         const projectsCollection =  client.db("Niloy-Dey-Portfolio").collection("projects");
         const skillsCollection =  client.db("Niloy-Dey-Portfolio").collection("skills");
+        const htmlCollection =  client.db("Niloy-Dey-Portfolio").collection("html");
+        const cssCollection =  client.db("Niloy-Dey-Portfolio").collection("css");
 
 
 
@@ -49,7 +51,20 @@ async function run() {
             res.send(skills);
         })
 
-        
+        //Getting html data 
+        app.get('/html', async(req, res) =>{
+            const query = {};
+            const cursor = htmlCollection.find(query);
+            const html = await cursor.toArray();
+            res.send(html);
+        })
+        //Getting css data 
+        app.get('/css', async(req, res) =>{
+            const query = {};
+            const cursor = cssCollection.find(query);
+            const css = await cursor.toArray();
+            res.send(css);
+        })
         // GETTING SINGLE bike DATA
         // app.get('/projects/:id', async (req, res) => {
         //     const id = req.params.id;
